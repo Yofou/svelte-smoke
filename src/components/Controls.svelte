@@ -23,6 +23,7 @@
 
 	<fieldset>
 		<legend>Smoke Color(s)</legend>
+		<small>Right click color, to remove</small>
 		{#each $smoke_color as color}
 			<input on:contextmenu|preventDefault={removeColor(color)} type="color" bind:value={color}>
 		{/each}
