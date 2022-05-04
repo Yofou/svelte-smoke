@@ -1,5 +1,13 @@
 <script lang="ts">
 	import { amount, background_color, smoke_color, speed } from "$lib/store";
+
+	const addNewColor = () => {
+		$smoke_color = [...$smoke_color, "#000"]
+	}
+
+	const removeColor = (color: string) => () => {
+		$smoke_color = $smoke_color.filter( smoke => smoke != color )
+	}
 </script>
 
 <form>
@@ -14,8 +22,11 @@
 	</fieldset>
 
 	<fieldset>
-		<label for="smoke-color">smoke color - {$smoke_color}</label>
-		<input id="smoke-color" type="color" bind:value={$smoke_color}>
+		<legend>Smoke Color(s)</legend>
+		{#each $smoke_color as color}
+			<input on:contextmenu|preventDefault={removeColor(color)} type="color" bind:value={color}>
+		{/each}
+		<button type="button" on:click={addNewColor}>Added new Color</button>
 	</fieldset>
 
 	<fieldset>
@@ -32,6 +43,11 @@
 
 		background: rgba(0, 0, 0, 0.4);
 		width: 250px;
-		min-height: 300px;
+		color: white;
+	}
+
+	fieldset button {
+		display: block;
+		margin-top: 10px;
 	}
 </style>
