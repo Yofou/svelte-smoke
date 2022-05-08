@@ -35,7 +35,7 @@
 
 	<fieldset>
 		<label for="intensity">Intensitiy</label>
-		<input type="range" min="0" max="1" step={0.1} bind:value={intense}>
+		<input id="intensity" type="range" min="0" max="1" step={0.1} bind:value={intense}>
 	</fieldset>
 
 	<fieldset>
