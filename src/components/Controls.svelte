@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { amount, background_color, smoke_color, speed } from "$lib/store";
+	import { amount, background_color, intensity, smoke_color, speed } from "$lib/store";
 
 	const addNewColor = () => {
 		$smoke_color = [...$smoke_color, "#000"]
@@ -8,6 +8,9 @@
 	const removeColor = (color: string) => () => {
 		$smoke_color = $smoke_color.filter( smoke => smoke != color )
 	}
+
+	let intense = $intensity
+	$: intensity.set(intense)
 </script>
 
 <form>
@@ -28,6 +31,11 @@
 			<input on:contextmenu|preventDefault={removeColor(color)} type="color" bind:value={color}>
 		{/each}
 		<button type="button" on:click={addNewColor}>Added new Color</button>
+	</fieldset>
+
+	<fieldset>
+		<label for="intensity">Intensitiy</label>
+		<input type="range" min="0" max="1" step={0.1} bind:value={intense}>
 	</fieldset>
 
 	<fieldset>

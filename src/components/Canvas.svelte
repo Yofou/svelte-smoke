@@ -1,7 +1,7 @@
 <script lang="ts">
 	import * as Three from "three";
 	import * as SC from "svelte-cubed";
-	import { amount, background_color, smoke_color, speed } from "$lib/store";
+	import { amount, background_color, intensity, smoke_color, speed } from "$lib/store";
 	import { tweened } from "svelte/motion"
 
 	const map = new Three.TextureLoader().load("/Smoke-Element.png");
@@ -26,7 +26,7 @@
 	{#each meshes as mesh}
 		<SC.Mesh
 			geometry={new Three.PlaneGeometry(300, 300)}
-			material={new Three.MeshBasicMaterial(mesh.config)}
+			material={new Three.MeshLambertMaterial(mesh.config)}
 			position={[
 				Math.random() * 500 - 250,
 				Math.random() * 500 - 250,
@@ -38,7 +38,7 @@
 
 	<SC.DirectionalLight
 		color={new Three.Color(0xffffff)}
-		intensity={0.5}
+		intensity={$intensity}
 		position={[-1, 0, 1]}
 	/>
 	<SC.PerspectiveCamera
